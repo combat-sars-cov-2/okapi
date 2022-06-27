@@ -1,5 +1,4 @@
 import os
-import subprocess
 import click
 
 from decouple import config
@@ -7,7 +6,8 @@ from github import Github, GithubException
 from loguru import logger
 from lib.tools import read_from_plugins, install_gx_tools
 from lib.tool_shed import complete_metadata
-from lib.utils import ensure_dir, download_plugin_assets, extract_plugin_jars
+from lib.utils import download_plugin_assets, extract_plugin_jars, set_global_vars
+from lib.singularity import build_image, move_images
 
 CONTEXT_SETTINGS = dict(
     default_map={
@@ -33,7 +33,6 @@ def workbench():
     support@sanbi.ac.za - for any issues
     \f
 
-    :param click.core.Context ctx: Click context.
     """
     pass
 
@@ -99,7 +98,7 @@ def install_tools(galaxy, user, password, api_key):
     """
     logger.info("Install to Galaxy Instance")
     plugins_tools = read_from_plugins(PATH_TO_PLUGINS)
-    install_gx_tools(plugins_tools)
+    install_gx_tools(plugins_tools, galaxy, user, password, api_key)
 
 
 @workbench.command()
@@ -135,11 +134,16 @@ def build_images(illumina_version, nanopore_version, access_token):
     for tools in tool_list:
         for t in tools:
             try:
-                data = complete_metadata(t)
-                print(data)
+                spec_strs = complete_metadata(t)
+                logger.info(spec_strs)
+
+                # build the containers
+                build_image(spec_strs)
             except Exception as e:
-                logger.error(f"Error, while trying to build image for tool {t['name']}")
+                logger.error(f"Error, while trying to build singularity image for tool {t['name']}")
                 raise click.ClickException(f"Something went wrong: {repr(e)}")
+    # move the developed singularity images to the default path
+    move_images(src='./singularity_import', dest='./database/container_cache/singularity/mulled')
 
 @workbench.command()
 def install_workflows():
@@ -150,4 +154,5 @@ def install_workflows():
 
 
 if __name__ == "__main__":
+    set_global_vars(PATH_TO_PLUGINS, CURRENT_DIR)
     workbench()
