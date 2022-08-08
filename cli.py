@@ -1,20 +1,19 @@
 import os
-import subprocess
-import click
 
+import click
 from decouple import config
 from github import Github, GithubException
 from loguru import logger
-from lib.tools import read_from_plugins, install_gx_tools
+
 from lib.tool_shed import complete_metadata
-from lib.utils import ensure_dir, download_plugin_assets, extract_plugin_jars
+from lib.tools import read_from_plugins, install_gx_tools
+from lib.utils import download_plugin_assets, extract_plugin_jars
 
 CONTEXT_SETTINGS = dict(
     default_map={
         "download_jar": {
             "illumina_version": config("ILLUMINA_VERSION", default="latest"),
             "nanopore_version": config("NANOPORE_VERSION", default="latest"),
-            "access_token": config("GITHUB_ACCESS_TOKEN", default=False),
         }
     }
 )
@@ -32,8 +31,6 @@ def workbench():
     workbench tools and workflows.
     support@sanbi.ac.za - for any issues
     \f
-
-    :param click.core.Context ctx: Click context.
     """
     pass
 
@@ -54,7 +51,7 @@ def download_jar(illumina_version, nanopore_version, access_token):
     try:
         g = Github(access_token)
     except GithubException as e:
-        logger.error("Github token is missing or invalid")
+        logger.error("Github token is invalid")
         raise click.ClickException(f"Something went wrong: {repr(e)}")
 
     plugin_versions = {
@@ -62,6 +59,7 @@ def download_jar(illumina_version, nanopore_version, access_token):
         "irida-plugin-sars-cov-2-nanopore": nanopore_version,
     }
     download_plugin_assets(g, plugin_versions)
+
 
 @workbench.command()
 def extract_jar():
@@ -71,6 +69,7 @@ def extract_jar():
     """
     # file_names from arguments
     extract_plugin_jars()
+
 
 @workbench.command()
 def deploy_plugin():
@@ -123,7 +122,7 @@ def build_images(illumina_version, nanopore_version, access_token):
 
     plugin_versions = {
         "irida-plugin-sars-cov-2-illumina": illumina_version,
-        'irida-plugin-sars-cov-2-nanopore': nanopore_version,
+        "irida-plugin-sars-cov-2-nanopore": nanopore_version,
     }
     # download plugins
     download_plugin_assets(g, plugin_versions)
@@ -140,6 +139,7 @@ def build_images(illumina_version, nanopore_version, access_token):
             except Exception as e:
                 logger.error(f"Error, while trying to build image for tool {t['name']}")
                 raise click.ClickException(f"Something went wrong: {repr(e)}")
+
 
 @workbench.command()
 def install_workflows():

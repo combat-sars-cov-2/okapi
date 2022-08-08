@@ -1,7 +1,9 @@
 import os
+import subprocess
 import urllib
-import click
 
+import click
+from github import GithubException
 from loguru import logger
 from tqdm.auto import tqdm
 
@@ -121,6 +123,3 @@ def extract_plugin_jars():
     ]
     for file_name in file_names:
         unzip(file_name)
-
-
-
