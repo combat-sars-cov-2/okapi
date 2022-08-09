@@ -1,0 +1,6 @@
+name: workbench-cli
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+prefix: /usr/local/Caskroom/miniconda/base/envs/workbench-cli
