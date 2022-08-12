@@ -1,20 +1,19 @@
 import os
-import click
 
+import click
 from decouple import config
 from github import Github, GithubException
 from loguru import logger
-from lib.tools import read_from_plugins, install_gx_tools
+
 from lib.tool_shed import complete_metadata
-from lib.utils import download_plugin_assets, extract_plugin_jars, set_global_vars
-from lib.singularity import build_image, move_images
+from lib.tools import read_from_plugins, install_gx_tools
+from lib.utils import download_plugin_assets, extract_plugin_jars
 
 CONTEXT_SETTINGS = dict(
     default_map={
         "download_jar": {
             "illumina_version": config("ILLUMINA_VERSION", default="latest"),
             "nanopore_version": config("NANOPORE_VERSION", default="latest"),
-            "access_token": config("GITHUB_ACCESS_TOKEN", default=False),
         }
     }
 )
@@ -32,7 +31,6 @@ def workbench():
     workbench tools and workflows.
     support@sanbi.ac.za - for any issues
     \f
-
     """
     pass
 
@@ -53,7 +51,7 @@ def download_jar(illumina_version, nanopore_version, access_token):
     try:
         g = Github(access_token)
     except GithubException as e:
-        logger.error("Github token is missing or invalid")
+        logger.error("Github token is invalid")
         raise click.ClickException(f"Something went wrong: {repr(e)}")
 
     plugin_versions = {
@@ -61,6 +59,7 @@ def download_jar(illumina_version, nanopore_version, access_token):
         "irida-plugin-sars-cov-2-nanopore": nanopore_version,
     }
     download_plugin_assets(g, plugin_versions)
+
 
 @workbench.command()
 def extract_jar():
@@ -70,6 +69,7 @@ def extract_jar():
     """
     # file_names from arguments
     extract_plugin_jars()
+
 
 @workbench.command()
 def deploy_plugin():
@@ -98,7 +98,7 @@ def install_tools(galaxy, user, password, api_key):
     """
     logger.info("Install to Galaxy Instance")
     plugins_tools = read_from_plugins(PATH_TO_PLUGINS)
-    install_gx_tools(plugins_tools, galaxy, user, password, api_key)
+    install_gx_tools(plugins_tools)
 
 
 @workbench.command()
@@ -122,7 +122,7 @@ def build_images(illumina_version, nanopore_version, access_token):
 
     plugin_versions = {
         "irida-plugin-sars-cov-2-illumina": illumina_version,
-        'irida-plugin-sars-cov-2-nanopore': nanopore_version,
+        "irida-plugin-sars-cov-2-nanopore": nanopore_version,
     }
     # download plugins
     download_plugin_assets(g, plugin_versions)
@@ -134,16 +134,12 @@ def build_images(illumina_version, nanopore_version, access_token):
     for tools in tool_list:
         for t in tools:
             try:
-                spec_strs = complete_metadata(t)
-                logger.info(spec_strs)
-
-                # build the containers
-                build_image(spec_strs)
+                data = complete_metadata(t)
+                print(data)
             except Exception as e:
-                logger.error(f"Error, while trying to build singularity image for tool {t['name']}")
+                logger.error(f"Error, while trying to build image for tool {t['name']}")
                 raise click.ClickException(f"Something went wrong: {repr(e)}")
-    # move the developed singularity images to the default path
-    move_images(src='./singularity_import', dest='./database/container_cache/singularity/mulled')
+
 
 @workbench.command()
 def install_workflows():
@@ -154,5 +150,4 @@ def install_workflows():
 
 
 if __name__ == "__main__":
-    set_global_vars(PATH_TO_PLUGINS, CURRENT_DIR)
     workbench()

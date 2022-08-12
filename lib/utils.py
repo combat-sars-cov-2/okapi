@@ -1,8 +1,9 @@
 import os
 import subprocess
 import urllib
-import click
 
+import click
+from github import GithubException
 from loguru import logger
 from tqdm.auto import tqdm
 from github import GithubException
