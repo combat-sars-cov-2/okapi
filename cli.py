@@ -1,6 +1,7 @@
 import click
 
 from lib.install import commands as installers
+from lib.service import commands as services
 
 
 @click.group()
@@ -16,3 +17,4 @@ def workbench():
 
 
 workbench.add_command(installers.install)
+workbench.add_command(services.service)
