@@ -13,10 +13,18 @@ PATH_TO_PLUGINS = os.path.join(CURRENT_DIR, f"sources/plugins/")
 
 
 @click.command()
-@click.option("--galaxy", default="http://nginx:90", help="The targeted Galaxy instance")
-@click.option("--user", default="admin@galaxy.org", help="The username to use accessing the galaxy instance")
+@click.option(
+    "--galaxy", default="http://nginx:90", help="The targeted Galaxy instance"
+)
+@click.option(
+    "--user",
+    default="admin@galaxy.org",
+    help="The username to use accessing the galaxy instance",
+)
 @click.option("--password", default="password", help="Password for the user")
-@click.option("--api-key", default="fakekey", help="API Key token generated for the user")
+@click.option(
+    "--api-key", default="fakekey", help="API Key token generated for the user"
+)
 def galaxy_tools(galaxy, user, password, api_key):
     """
     This command installs the workflow in Galaxy
@@ -27,8 +35,12 @@ def galaxy_tools(galaxy, user, password, api_key):
 
 
 @click.command()
-@click.option("--illumina-version", default="latest", help="Illumina (SARS-COV-2) release version")
-@click.option("--nanopore-version", default="latest", help="Nanopore (SARS-COV-2) release version")
+@click.option(
+    "--illumina-version", default="latest", help="Illumina (SARS-COV-2) release version"
+)
+@click.option(
+    "--nanopore-version", default="latest", help="Nanopore (SARS-COV-2) release version"
+)
 def singularity_images(illumina_version, nanopore_version):
     """
     Build Singularity Images from a Galaxy Workflow file

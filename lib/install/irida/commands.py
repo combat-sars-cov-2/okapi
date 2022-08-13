@@ -21,8 +21,12 @@ PATH_TO_PLUGINS = os.path.join(CURRENT_DIR, f"sources/plugins/")
 
 
 @click.command()
-@click.option("--illumina-version", default="latest", help="Illumina (SARS-COV-2) release version")
-@click.option("--nanopore-version", default="latest", help="Nanopore (SARS-COV-2) release version")
+@click.option(
+    "--illumina-version", default="latest", help="Illumina (SARS-COV-2) release version"
+)
+@click.option(
+    "--nanopore-version", default="latest", help="Nanopore (SARS-COV-2) release version"
+)
 def irida_plugins(illumina_version, nanopore_version):
     """
     This command installs workflow plugins into IRIDA
@@ -37,8 +41,10 @@ def irida_plugins(illumina_version, nanopore_version):
         logger.error("Github token is invalid")
         raise click.ClickException(f"Something went wrong: {repr(e)}")
 
-    plugin_versions = {"irida-plugin-sars-cov-2-illumina": illumina_version,
-                       "irida-plugin-sars-cov-2-nanopore": nanopore_version}
+    plugin_versions = {
+        "irida-plugin-sars-cov-2-illumina": illumina_version,
+        "irida-plugin-sars-cov-2-nanopore": nanopore_version,
+    }
 
     # downloads the plugin jars
     download_plugin_assets(g, plugin_versions)

@@ -43,7 +43,7 @@ def read_tool_set_file(tool_file):
 
 
 def install_gx_tools(plugins_tools, galaxy, user, password, api_key):
-    # service the ephemiris tool to install tools
+    # start the ephemiris tool to install tools
     for tools in plugins_tools:
         for t in tools:
             try:
