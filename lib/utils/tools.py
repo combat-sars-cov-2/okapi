@@ -1,8 +1,8 @@
+import os
 import subprocess
 import sys
 
 import click
-import os
 import yaml
 from loguru import logger
 

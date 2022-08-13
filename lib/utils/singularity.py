@@ -1,9 +1,8 @@
+import os
 import subprocess
 import sys
 
 import click
-import os
-
 from loguru import logger
 
 # from toolshed import complete_metadata

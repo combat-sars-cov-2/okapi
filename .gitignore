@@ -2,3 +2,7 @@
 lib/__pycache__/
 sarscov2-artic-nanopore-pipeline-plugin-0.1.8.jar
 sarscov2-artic-illumina-pipeline-plugin-0.1.11.jar
+src/
+involucro
+singularity_import
+venv

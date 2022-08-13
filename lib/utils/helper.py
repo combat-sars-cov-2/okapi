@@ -6,7 +6,6 @@ import click
 from github import GithubException
 from loguru import logger
 from tqdm.auto import tqdm
-from github import GithubException
 
 CURRENT_DIR = ""
 PATH_TO_PLUGINS = ""
