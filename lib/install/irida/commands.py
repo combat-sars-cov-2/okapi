@@ -5,7 +5,7 @@ from decouple import config
 from github import Github, GithubException
 from loguru import logger
 
-from lib.utils.helper import download_plugin_assets, extract_plugin_jars
+from lib.utils.helpers.misc import download_plugin_assets, extract_plugin_jars
 
 CONTEXT_SETTINGS = dict(
     default_map={

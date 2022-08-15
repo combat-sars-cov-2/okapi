@@ -11,20 +11,20 @@ config = {
 
 
 @click.command()
-@click.option('-c', '--component', type=click.Choice(['workbench', 'irida', 'galaxy']), required=True)
-def start(component):
+@click.option('-i', '--instance', type=click.Choice(['workbench', 'irida', 'galaxy']), required=True)
+def start(instance):
     """
     Start a service of the workbench
     \f
     """
-    if component == 'workbench':
+    if instance == 'workbench':
         pandora = galaxy_factory.create('WORKBENCH', **config)
         pandora.test_connection()
 
-    if component == 'irida':
+    if instance == 'irida':
         galaxy = galaxy_factory.create('IRIDA', **config)
         galaxy.test_connection()
 
-    if component == 'galaxy':
+    if instance == 'galaxy':
         local = galaxy_factory.create('GALAXY', **config)
         local.start()

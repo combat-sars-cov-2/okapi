@@ -130,6 +130,3 @@ def extract_plugin_jars():
     for file_name in file_names:
         unzip(file_name)
 
-# connect to remote machine
-
-# disconnect from a remote machine

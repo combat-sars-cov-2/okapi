@@ -4,7 +4,7 @@ import click
 from github import Github, GithubException
 from loguru import logger
 
-from lib.utils.helper import download_plugin_assets, extract_plugin_jars
+from lib.utils.helpers.misc import download_plugin_assets, extract_plugin_jars
 from lib.utils.tool_shed import complete_metadata
 from lib.utils.tools import read_from_plugins, install_gx_tools
 
