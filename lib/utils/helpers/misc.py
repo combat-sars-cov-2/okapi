@@ -3,6 +3,7 @@ import subprocess
 import urllib
 
 import click
+import yaml
 from github import GithubException
 from loguru import logger
 from tqdm.auto import tqdm
@@ -130,3 +131,15 @@ def extract_plugin_jars():
     for file_name in file_names:
         unzip(file_name)
 
+
+def read_config_file(conf):
+    """
+    READ the config file
+    :param config: a configuration file
+    :return: dict of config items
+    """
+    with open(conf, "r") as stream:
+        try:
+            return yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
