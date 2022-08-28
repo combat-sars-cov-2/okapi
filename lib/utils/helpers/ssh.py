@@ -1,5 +1,7 @@
 import paramiko
 
+from loguru import logger
+
 
 class Ssh:
     """
@@ -20,7 +22,11 @@ class Ssh:
         :param cmd:
         :return:
         """
-        stdin, stdout, stderr = self.client.exec_command(cmd)
+        logger.info(f"command: {cmd}")
+        stdin, stdout, stderr = self.client.exec_command(cmd, get_pty=True)
+        for line in iter(stdout.readline, ""):
+            logger.debug(line, end="")
+        logger.info('finished.')
         return stdout.read().decode()
 
     def close(self):
@@ -37,8 +43,8 @@ class SshBasic(Ssh):
     """
 
     def __init__(self, config):
-        self.password = config['password']
-        super().__init__(config)
+        self.password = config['workbench']['password']
+        super().__init__(config['workbench'])
 
     def connect(self):
         self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -55,10 +61,8 @@ class SshKeyBase(Ssh):
     """
 
     def __init__(self, config):
-        self.username = config['username']
-        self.host = config['domain']
-        self.ssh_key = config['ssh_key_file']
-        super().__init__()
+        self.ssh_key = config['workbench']['ssh_key']
+        super().__init__(config['workbench'])
 
     def connect(self):
         """Connect with the ssh key"""
@@ -66,3 +70,6 @@ class SshKeyBase(Ssh):
         policy = paramiko.AutoAddPolicy()
         self.client.set_missing_host_key_policy(policy)
         self.client.connect(self.host, username=self.username, pkey=pkey)
+
+    def exec(self, cmd):
+        return super().exec(cmd)

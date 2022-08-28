@@ -6,3 +6,4 @@ src/
 involucro
 singularity_import
 venv
+cli_backup.py

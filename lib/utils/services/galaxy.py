@@ -11,23 +11,24 @@ class GalaxyService(ServiceFactory):
         self._secret = secret
 
     def test_connection(self):
-        print(f'Accessing Galaxy with {self._key} and {self._secret}')
+        print(f"Accessing Galaxy with {self._key} and {self._secret}")
 
     def start(self):
-        print(f'Starting Galaxy with {self._key} and {self._secret}')
+        print(f"Starting Galaxy with {self._key} and {self._secret}")
 
 
 class GalaxyServiceBuilder:
     def __init__(self):
         self._instance = None
 
-    def __call__(self, galaxy_client_key, galaxy_client_secret, **_ignored):
+    def __call__(self, client_key, client_secret, **_ignored):
         if not self._instance:
-            api_key, secret = self.authorize(galaxy_client_key, galaxy_client_secret)
+            api_key, secret = self.authorize(client_key, client_secret)
             self._instance = GalaxyService(api_key, secret)
         return self._instance
 
-    def authorize(self, key, secret):
+    @staticmethod
+    def authorize(key, secret):
         return 'GALAXY_KEY', 'GALAXY_SECRET'
 
 

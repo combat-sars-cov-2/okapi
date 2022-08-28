@@ -5,6 +5,8 @@ from pathlib import Path
 import click
 from loguru import logger
 
+from lib.shared.galaxy import start as galaxy_start
+from lib.shared.irida import start as irida_start
 from lib.utils.helpers.misc import read_config_file
 from lib.utils.helpers.ssh import SshBasic, SshKeyBase
 from lib.utils.services.galaxy import factory as galaxy_factory
@@ -15,38 +17,31 @@ CONFIG_DEFAULTS = {
 }
 
 
-def start_galaxy(ssh_session):
+def start_all():
     """
+    Using
     :return:
     """
-    logger.info("ABOUT TO START GALAXY")
-    ssh_session.connect()
 
-    results = ssh_session.exec('dig')
-    logger.debug(results)
+    cmd = 'docker-compose start'
 
-
-def start_irida(ssh_session):
-    """
-    :return:
-    """
-    logger.info("ABOUT TO START IRIDA")
     pass
 
 
-def start_all():
+def stop_all():
     """
+    Using
     :return:
     """
-    cmd = 'docker-compose -f docker-compose.yml -f docker-compose.singularity.yml -f docker-compose.irida.yml -f ' \
-          'docker-compose.irida_ssl.yml up -d '
+
+    cmd = 'docker-compose stop'
     pass
 
 
 FUNC_MAP = {
     'all': start_all,
-    'irida': start_irida,
-    'galaxy': start_galaxy
+    'irida': irida_start,
+    'galaxy': galaxy_start
 }
 
 
