@@ -17,23 +17,25 @@ CONFIG_DEFAULTS = {
 }
 
 
-def start_all(ssh_session):
+def start_all(cfg, ssh_session):
     """
     Using
     :return:
     """
-
-    cmd = 'docker-compose start'
+    cmd = f"cd {cfg['root_path']};"
+    cmd += 'docker-compose -f docker-compose.yml -f docker-compose.singularity.yml -f docker-compose.irida.yml -f ' \
+           'docker-compose.irida_ssl.yml up -d '
     ssh_session.exec(cmd)
 
 
-def stop_all(ssh_session):
+def stop_all(cfg, ssh_session):
     """
     Using
     :return:
     """
-
-    cmd = 'docker-compose stop'
+    cmd = f"cd {cfg['root_path']};"
+    cmd += 'docker-compose -f docker-compose.yml -f docker-compose.singularity.yml -f docker-compose.irida.yml -f ' \
+           'docker-compose.irida_ssl.yml down '
     ssh_session.exec(cmd)
 
 
