@@ -17,25 +17,24 @@ CONFIG_DEFAULTS = {
 }
 
 
-def start_all():
+def start_all(ssh_session):
     """
     Using
     :return:
     """
 
     cmd = 'docker-compose start'
+    ssh_session.exec(cmd)
 
-    pass
 
-
-def stop_all():
+def stop_all(ssh_session):
     """
     Using
     :return:
     """
 
     cmd = 'docker-compose stop'
-    pass
+    ssh_session.exec(cmd)
 
 
 FUNC_MAP = {
