@@ -12,8 +12,8 @@ class Ssh:
         """
         Initialisation of the class attributes
         """
-        self.username = config['username']
-        self.host = config['domain']
+        self.username = config["username"]
+        self.host = config["domain"]
         self.client = paramiko.client.SSHClient()
 
     def exec(self, cmd):
@@ -26,7 +26,7 @@ class Ssh:
         stdin, stdout, stderr = self.client.exec_command(cmd, get_pty=True)
         for line in iter(stdout.readline, ""):
             logger.debug(line, end="")
-        logger.info('finished.')
+        logger.info("finished.")
         return stdout.read().decode()
 
     def close(self):
@@ -43,13 +43,18 @@ class SshBasic(Ssh):
     """
 
     def __init__(self, config):
-        self.password = config['workbench']['password']
-        super().__init__(config['workbench'])
+        self.password = config["workbench"]["password"]
+        super().__init__(config["workbench"])
 
     def connect(self):
         self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        self.client.connect(self.host, username=self.username, password=self.password, look_for_keys=False,
-                            allow_agent=False)
+        self.client.connect(
+            self.host,
+            username=self.username,
+            password=self.password,
+            look_for_keys=False,
+            allow_agent=False,
+        )
 
     def exec(self, cmd):
         return super().exec(cmd)
@@ -61,8 +66,8 @@ class SshKeyBase(Ssh):
     """
 
     def __init__(self, config):
-        self.ssh_key = config['workbench']['ssh_key']
-        super().__init__(config['workbench'])
+        self.ssh_key = config["workbench"]["ssh_key"]
+        super().__init__(config["workbench"])
 
     def connect(self):
         """Connect with the ssh key"""

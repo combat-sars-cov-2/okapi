@@ -39,8 +39,8 @@ class IridaServiceBuilder:
 
     @staticmethod
     def authorize(key, secret):
-        return 'IRIDA_KEY', 'IRIDA_SECRET'
+        return "IRIDA_KEY", "IRIDA_SECRET"
 
 
 factory = ServiceFactory()
-factory.register_builder('IRIDA', IridaServiceBuilder())
+factory.register_builder("IRIDA", IridaServiceBuilder())

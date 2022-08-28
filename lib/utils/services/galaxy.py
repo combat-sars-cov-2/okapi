@@ -29,8 +29,8 @@ class GalaxyServiceBuilder:
 
     @staticmethod
     def authorize(key, secret):
-        return 'GALAXY_KEY', 'GALAXY_SECRET'
+        return "GALAXY_KEY", "GALAXY_SECRET"
 
 
 factory = ServiceFactory()
-factory.register_builder('GALAXY', GalaxyServiceBuilder())
+factory.register_builder("GALAXY", GalaxyServiceBuilder())
