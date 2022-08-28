@@ -11,10 +11,10 @@ class GalaxyService(ServiceFactory):
         self._secret = secret
 
     def test_connection(self):
-        print(f"Accessing Galaxy with {self._key} and {self._secret}")
+        pass
 
     def start(self):
-        print(f"Starting Galaxy with {self._key} and {self._secret}")
+        pass
 
 
 class GalaxyServiceBuilder:

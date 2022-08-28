@@ -16,7 +16,7 @@ class IridaService(ServiceFactory):
         Test through the api if connection is possible
         If the connection is ok, a restart of the services is done via api if possible.
         """
-        print(f'Accessing Irida with {self._key} and {self._secret}')
+        pass
 
     def soft_start(self):
         """
@@ -24,7 +24,7 @@ class IridaService(ServiceFactory):
         Start irida via api if connection fails
         If this is successful a code is returned and restarting/starting irida via docker is skipped
         """
-        print(f'Starting Irida with {self._key} and {self._secret}')
+        pass
 
 
 class IridaServiceBuilder:
