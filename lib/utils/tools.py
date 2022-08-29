@@ -1,5 +1,10 @@
-import yaml, os
+import os
+import subprocess
 import sys
+
+import click
+import yaml
+from loguru import logger
 
 # from toolshed import complete_metadata
 
@@ -13,7 +18,7 @@ def read_from_plugins(irida_plugin_path):
         if os.path.isfile(os.path.join(irida_plugin_path, f))
     ]
 
-    tool_files = [get_fullpath_for_tool_yaml(f) for f in file_names]
+    tool_files = [get_fullpath_for_tool_yaml(f, irida_plugin_path) for f in file_names]
     return [read_tool_set_file(file) for file in tool_files]
 
 
@@ -37,8 +42,8 @@ def read_tool_set_file(tool_file):
         return [t for t in yaml.load(file, Loader=yaml.FullLoader)["tools"]]
 
 
-def install_gx_tools(plugins_tools):
-    # run the ephemiris tool to install tools
+def install_gx_tools(plugins_tools, galaxy, user, password, api_key):
+    # start the ephemiris tool to install tools
     for tools in plugins_tools:
         for t in tools:
             try:

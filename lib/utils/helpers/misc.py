@@ -3,12 +3,19 @@ import subprocess
 import urllib
 
 import click
+import yaml
 from github import GithubException
 from loguru import logger
 from tqdm.auto import tqdm
 
-CURRENT_DIR = os.path.dirname(__file__)
-PATH_TO_PLUGINS = os.path.join(CURRENT_DIR, f"sources/plugins/")
+CURRENT_DIR = ""
+PATH_TO_PLUGINS = ""
+
+
+def set_global_vars(path_to_plugins, current_dir):
+    global PATH_TO_PLUGINS, CURRENT_DIR
+    PATH_TO_PLUGINS = path_to_plugins
+    CURRENT_DIR = current_dir
 
 
 def ensure_dir(file_path):
@@ -29,7 +36,7 @@ def unzip(file_name):
 
     logger.info(f"Processing: {file_name} into: {o_dir}")
 
-    command = f"unzip {os.path.join(PATH_TO_PLUGINS, file_name)} -d {o_dir}"
+    command = f"unzip -o -q {os.path.join(PATH_TO_PLUGINS, file_name)} -d {o_dir}"
     process = subprocess.Popen(command, shell=True)
     status = os.waitpid(process.pid, 0)[1]
 
@@ -123,3 +130,16 @@ def extract_plugin_jars():
     ]
     for file_name in file_names:
         unzip(file_name)
+
+
+def read_config_file(conf):
+    """
+    READ the config file
+    :param config: a configuration file
+    :return: dict of config items
+    """
+    with open(conf, "r") as stream:
+        try:
+            return yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
