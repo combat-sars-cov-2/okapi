@@ -1,19 +1,25 @@
 from __future__ import annotations
 
 
-def start(ssh_session):
+def launch(cfg, ssh_session):
     """
-    start irida instance
+    launch galaxy instance
     \f
     """
-    cmd = "docker-compose start galaxy-server"
+    cmd = f"cd {cfg['root_path']};"
+    cmd += "docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d"
+
     ssh_session.exec(cmd)
 
 
-def stop(ssh_session):
+def shut(cfg, ssh_session):
     """
-    Stop irida instance
+    Shut galaxy instance
     \f
     """
-    cmd = "docker-compose stop galaxy-server"
+
+    cmd = f"cd {cfg['root_path']};"
+    cmd += (
+        "docker-compose stop galaxy-server;"
+    )
     ssh_session.exec(cmd)

@@ -1,7 +1,7 @@
 import click
 
 from lib.install import commands as installers
-from lib.start import commands as services
+from lib.launch import commands as services
 
 
 @click.group()
@@ -18,4 +18,4 @@ def main(version):
 
 
 main.add_command(installers.install)
-main.add_command(services.start)
+main.add_command(services.launch)

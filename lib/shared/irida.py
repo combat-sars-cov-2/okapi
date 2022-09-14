@@ -1,19 +1,24 @@
 from __future__ import annotations
 
 
-def start(ssh_session):
+def launch(cfg, ssh_session):
     """
-    start irida instance
+    launch irida instance
     \f
     """
-    cmd = "docker-compose start irida_web"
+    cmd = f"cd {cfg['root_path']};"
+    cmd += "docker-compose -f docker-compose.irida.yml -f docker-compose.irida_ssl.yml up -d"
     ssh_session.exec(cmd)
 
 
-def stop(ssh_session):
+def shut(cfg, ssh_session):
     """
-    Stop irida instance
+    Shut irida instance
     \f
     """
-    cmd = "docker-compose stop irida_web"
+
+    cmd = f"cd {cfg['root_path']};"
+    cmd += (
+        "docker-compose stop irida;"
+    )
     ssh_session.exec(cmd)

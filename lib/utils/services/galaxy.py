@@ -13,7 +13,7 @@ class GalaxyService(ServiceFactory):
     def test_connection(self):
         pass
 
-    def start(self):
+    def launch(self):
         pass
 
 

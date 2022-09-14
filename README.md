@@ -90,7 +90,7 @@ Workbench-CLI is the toolbelt for managing a workbench (consisting of Galaxy and
 The worbench has the following high level commands:
 * workbench-cli deploy
 * workbench-cli install
-* workbench-cli start
+* workbench-cli launch
 * workbench-cli stop
 * workbench-cli uninstall
 
