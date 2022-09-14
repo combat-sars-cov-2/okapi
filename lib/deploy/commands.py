@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 
-def launch(cfg, ssh_session):
+def deploy(cfg, ssh_session):
     """
-    launch irida instance
+    Deploy irida instance
     \f
     """
     cmd = f"cd {cfg['root_path']};"
@@ -11,7 +11,7 @@ def launch(cfg, ssh_session):
     ssh_session.exec(cmd)
 
 
-def shut(cfg, ssh_session):
+def remove(cfg, ssh_session):
     """
     Shut irida instance
     \f
@@ -22,12 +22,3 @@ def shut(cfg, ssh_session):
         "docker-compose stop irida;"
     )
     ssh_session.exec(cmd)
-
-def deploy_plugin(cfg, ssh_session):
-    """
-    Deploy IRIDA plugin
-    \f
-    """
-
-    cmd = f"cd {cfg['root_path']};"
-    
