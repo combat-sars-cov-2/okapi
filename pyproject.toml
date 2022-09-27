@@ -1,14 +1,14 @@
 [build-system]
-requires = ["hatchling"]
 build-backend = "hatchling.build"
+requires = ["hatchling"]
 
 [project]
-name = "workbench-cli"
+name = "twiga"
 version = "0.0.1"
 authors = [
   { name="Zipho Mashologu", email="zipho@sanbi.ac.za" },
 ]
-description = "A workbench cli"
+description = "Twiga workbench, a command-line shell and scripting interface for Galaxy, Irida etc."
 readme = "README.md"
 license = { file="LICENSE" }
 requires-python = ">=3.7"
