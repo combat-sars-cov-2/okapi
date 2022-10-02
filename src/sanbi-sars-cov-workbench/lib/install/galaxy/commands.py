@@ -14,12 +14,12 @@ PATH_TO_PLUGINS = os.path.join(CURRENT_DIR, f"sources/plugins/")
 
 @click.command()
 @click.option(
-    "--galaxy", default="http://nginx:90", help="The targeted Galaxy instance"
+    "--galaxy-workbench", default="http://nginx:90", help="The targeted Galaxy instance"
 )
 @click.option(
     "--user",
-    default="admin@galaxy.org",
-    help="The username to use accessing the galaxy instance",
+    default="admin@galaxy-workbench.org",
+    help="The username to use accessing the galaxy-workbench instance",
 )
 @click.option("--password", default="password", help="Password for the user")
 @click.option(
@@ -53,8 +53,8 @@ def singularity_images(illumina_version, nanopore_version):
         raise click.ClickException(f"Something went wrong: {repr(e)}")
 
     plugin_versions = {
-        "irida-plugin-sars-cov-2-illumina": illumina_version,
-        "irida-plugin-sars-cov-2-nanopore": nanopore_version,
+        "irida-workbench-plugin-sars-cov-2-illumina": illumina_version,
+        "irida-workbench-plugin-sars-cov-2-nanopore": nanopore_version,
     }
     # download plugins
     download_plugin_assets(g, plugin_versions)
@@ -76,7 +76,7 @@ def singularity_images(illumina_version, nanopore_version):
 @click.command()
 def pangolin():
     """
-    This command installs the pangolin tool in galaxy
+    This command installs the pangolin tool in galaxy-workbench
     """
     pass
 
@@ -84,6 +84,6 @@ def pangolin():
 @click.command()
 def nanopore():
     """
-    This command installs the nanopore tool in galaxy
+    This command installs the nanopore tool in galaxy-workbench
     """
     pass

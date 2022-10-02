@@ -7,7 +7,7 @@ from lib.install.irida import commands as irida
 @click.group()
 def install():
     """
-    Group of sub-commands to install workbench tools, plugins, workflows.
+    Group of sub-commands to install sanbi-sars-cov-workbench tools, plugins, workflows.
     \f
     """
     pass

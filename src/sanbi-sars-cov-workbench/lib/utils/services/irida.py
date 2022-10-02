@@ -14,15 +14,15 @@ class IridaService(ServiceFactory):
         """
         TODO:
         Test through the api if connection is possible
-        If the connection is ok, a restart of the services is done via api if possible.
+        If the connection is ok, a relaunch of the services is done via api if possible.
         """
         pass
 
-    def soft_start(self):
+    def soft_launch(self):
         """
         TODO:
-        Start irida via api if connection fails
-        If this is successful a code is returned and restarting/starting irida via docker is skipped
+        Launch irida-workbench via api if connection fails
+        If this is successful a code is returned and relaunching/launching irida-workbench via docker is skipped
         """
         pass
 

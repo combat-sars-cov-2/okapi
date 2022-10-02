@@ -43,8 +43,8 @@ class SshBasic(Ssh):
     """
 
     def __init__(self, config):
-        self.password = config["workbench"]["password"]
-        super().__init__(config["workbench"])
+        self.password = config["sanbi-sars-cov-workbench"]["password"]
+        super().__init__(config["sanbi-sars-cov-workbench"])
 
     def connect(self):
         self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -66,8 +66,8 @@ class SshKeyBase(Ssh):
     """
 
     def __init__(self, config):
-        self.ssh_key = config["workbench"]["ssh_key"]
-        super().__init__(config["workbench"])
+        self.ssh_key = config["sanbi-sars-cov-workbench"]["ssh_key"]
+        super().__init__(config["sanbi-sars-cov-workbench"])
 
     def connect(self):
         """Connect with the ssh key"""

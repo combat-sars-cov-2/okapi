@@ -42,8 +42,8 @@ def irida_plugins(illumina_version, nanopore_version):
         raise click.ClickException(f"Something went wrong: {repr(e)}")
 
     plugin_versions = {
-        "irida-plugin-sars-cov-2-illumina": illumina_version,
-        "irida-plugin-sars-cov-2-nanopore": nanopore_version,
+        "irida-workbench-plugin-sars-cov-2-illumina": illumina_version,
+        "irida-workbench-plugin-sars-cov-2-nanopore": nanopore_version,
     }
 
     # downloads the plugin jars
