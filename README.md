@@ -228,7 +228,7 @@ Distributed under the Apache License. See `LICENSE` for more information.
 
 SANBI Team - [@combat-sars-cov-2](https://twitter.com/combat-sars-cov-2) - info@combat-sars-cov-2.org
 
-Project Link: [https://github.com/combat-sars-cov-2/Workbench-okapi](https://github.com/combat-sars-cov-2/Workbench-okapi)
+Project Link: [https://github.com/combat-sars-cov-2/okapi](https://github.com/combat-sars-cov-2/okapi)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
