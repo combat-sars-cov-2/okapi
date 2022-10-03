@@ -13,19 +13,18 @@ Irida/Galaxy workbench related tasks automated. Galaxy &amp; Irida server, manag
 
 
 <!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
+[//]: # ([![Contributors][contributors-shield]][contributors-url])
+
+[//]: # ([![Forks][forks-shield]][forks-url])
+
+[//]: # ([![Stargazers][stars-shield]][stars-url])
+
+[//]: # ([![Issues][issues-shield]][issues-url])
+
+[//]: # ([![MIT License][license-shield]][license-url])
+
+[//]: # ([![LinkedIn][linkedin-shield]][linkedin-url])
 
 
 
@@ -36,17 +35,17 @@ Irida/Galaxy workbench related tasks automated. Galaxy &amp; Irida server, manag
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Workbench Okapi</h3>
 
   <p align="center">
-    A getting started DOCUMENTATION for the Workbench CLI 
+    A getting started DOCUMENTATION for the Workbench okapi 
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/combat-sars-cov-2/workbench-cli/issues">Report Bug</a>
+    <a href="https://github.com/combat-sars-cov-2/Workbench-okapi/issues">Report Bug</a>
     ·
-    <a href="https://github.com/combat-sars-cov-2/workbench-cli/issues">Request Feature</a>
+    <a href="https://github.com/combat-sars-cov-2/Workbench-okapi/issues">Request Feature</a>
   </p>
 </div>
 
@@ -80,21 +79,21 @@ Irida/Galaxy workbench related tasks automated. Galaxy &amp; Irida server, manag
 
 
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+<!-- ABOUT WORKBENCH -->
+## About Workbench Okapi
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Workbench-CLI is the toolbelt for managing a workbench (consisting of Galaxy and IRIDA) pioneered by SANBI - UWC team.
+Workbench-okapi is the toolbelt for managing a workbench (consisting of Galaxy and IRIDA) pioneered by SANBI - UWC team.
 
-The worbench has the following high level commands:
-* workbench-okapi deploy
+The workbench has the following high level commands:
+* workbench-okapi deploy (coming soon)
 * workbench-okapi install
 * workbench-okapi launch
-* workbench-okapi stop
-* workbench-okapi uninstall
+* workbench-okapi stop (coming soon)
+* workbench-okapi uninstall (coming soon)
 
-Of course, the project will keep developing in fautures and utilities. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this workbench CLI tool!
+Of course, the project will keep developing in fautures and utilities. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this Workbench okapi tool!
 
 Use the `BLANK_README.md` to get started (for contributions - dev, tests, documentation).
 
@@ -134,11 +133,40 @@ _Below is an example of how you can instruct your audience on installing and set
 
 Pip Install
 ```sh
-  pip install sanbi_sars_cov_workbench-cli
+  pip install workbench-okapi
 ```
+### Configuration 
+A YAML conf file will be needed to be passed `$ workbench-okapi launch -c <conf_file location> <service>`when launching services on the workbench via the workbench-okapi tool.
 
+By default `workbench-okapi` looks at the user home directory for the `.okapi.yaml` file. 
+
+The sample for the config file is as follows:
+```yaml
+galaxy:
+    description: Galaxy instance
+    fqdn: galaxy.workbench.com
+    user: ubuntu
+    password: "passw0rd"
+    ssh_key: ~/identity.pem
+    root_path: /opt/workbench
+    api_client_key: mykey
+    api_client_secret: "LKAJHSKJAKJKHAKJSH"
+
+irida:
+    description: IRIDA instance
+    fqdn: irida.workbench.com
+    user: ubuntu
+    password: "passw0rd"
+    ssh_key: ~/identity.pem
+    root_path: /opt/workbench
+    api_client_key: mykey
+    api_client_secret: "LKAJHSKJAKJKHAKJSH"
+
+auth:
+    basic_auth: True
+
+```
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -200,7 +228,7 @@ Distributed under the Apache License. See `LICENSE` for more information.
 
 SANBI Team - [@combat-sars-cov-2](https://twitter.com/combat-sars-cov-2) - info@combat-sars-cov-2.org
 
-Project Link: [https://github.com/combat-sars-cov-2/workbench-cli](https://github.com/combat-sars-cov-2/workbench-cli)
+Project Link: [https://github.com/combat-sars-cov-2/Workbench-okapi](https://github.com/combat-sars-cov-2/Workbench-okapi)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
