@@ -1,4 +1,4 @@
-# Workbench-CLI
+# Workbench-okapi
 Irida/Galaxy workbench related tasks automated. Galaxy &amp; Irida server, management cli toolset
 
 <div id="top"></div>
