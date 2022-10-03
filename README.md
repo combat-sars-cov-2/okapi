@@ -88,11 +88,11 @@ Irida/Galaxy workbench related tasks automated. Galaxy &amp; Irida server, manag
 Workbench-CLI is the toolbelt for managing a workbench (consisting of Galaxy and IRIDA) pioneered by SANBI - UWC team.
 
 The worbench has the following high level commands:
-* workbench-cli deploy
-* workbench-cli install
-* workbench-cli launch
-* workbench-cli stop
-* workbench-cli uninstall
+* workbench-okapi deploy
+* workbench-okapi install
+* workbench-okapi launch
+* workbench-okapi stop
+* workbench-okapi uninstall
 
 Of course, the project will keep developing in fautures and utilities. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this workbench CLI tool!
 
