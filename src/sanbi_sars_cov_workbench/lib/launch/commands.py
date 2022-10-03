@@ -12,7 +12,7 @@ from src.sanbi_sars_cov_workbench.lib.utils.helpers.ssh import SshBasic, SshKeyB
 from src.sanbi_sars_cov_workbench.lib.utils.services.galaxy import factory as galaxy_factory
 from src.sanbi_sars_cov_workbench.lib.utils.services.irida import factory as irida_factory
 
-CONFIG_DEFAULTS = {"file": f"{Path.home()}/.sanbi_sars_cov_workbench-cli.yaml"}
+CONFIG_DEFAULTS = {"file": f"{Path.home()}/.okapi.yaml"}
 
 
 def launch_all(cfg, ssh_session):
@@ -49,7 +49,7 @@ FUNC_MAP = {"all": launch_all, "irida_workbench": irida_launch, "galaxy_workbenc
     "-c",
     "--conf",
     type=click.Path(exists=True),
-    help=f"Location of the client config files (default={Path.home()}/.sanbi_sars_cov_workbench-cli.yaml)",
+    help=f"Location of the client config files (default={Path.home()}/.okapi.yaml)",
 )
 @click.argument(
     "instance", type=click.Choice(["all", "irida_workbench", "galaxy_workbench"]), required=True
