@@ -1,0 +1,25 @@
+# ================================================================
+# Workbench instance information
+# ================================================================
+galaxy:
+    description: Galaxy instance
+    fqdn: galaxy.workbench.com
+    user: ubuntu
+    password: "passw0rd"
+    ssh_key: ~/identity.pem
+    root_path: /opt/workbench
+    api_client_key: mykey
+    api_client_secret: "LKAJHSKJAKJKHAKJSH"
+
+irida:
+    description: IRIDA instance
+    fqdn: irida.workbench.com
+    user: ubuntu
+    password: "passw0rd"
+    ssh_key: ~/identity.pem
+    root_path: /opt/workbench
+    api_client_key: mykey
+    api_client_secret: "LKAJHSKJAKJKHAKJSH"
+
+auth:
+    basic_auth: True

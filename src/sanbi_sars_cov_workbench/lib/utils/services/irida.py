@@ -31,9 +31,9 @@ class IridaServiceBuilder:
     def __init__(self):
         self._instance = None
 
-    def __call__(self, client_key, client_secret, **_ignored):
+    def __call__(self, api_client_key, api_client_secret, **_ignored):
         if not self._instance:
-            api_key, secret = self.authorize(client_key, client_secret)
+            api_key, secret = self.authorize(api_client_key, api_client_secret)
             self._instance = IridaService(api_key, secret)
         return self._instance
 

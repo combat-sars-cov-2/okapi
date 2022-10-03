@@ -14,34 +14,34 @@ from src.sanbi_sars_cov_workbench.lib.utils.services.irida import factory as iri
 
 CONFIG_DEFAULTS = {"file": f"{Path.home()}/.okapi.yaml"}
 
+#
+# def launch_all(cfg, ssh_session):
+#     """
+#     Using
+#     :return:
+#     """
+#     cmd = f"cd {cfg['root_path']};"
+#     cmd += (
+#         "docker-compose -f docker-compose.yml -f docker-compose.singularity.yml -f docker-compose.irida_workbench.yml -f "
+#         "docker-compose.irida_ssl.yml up -d "
+#     )
+#     ssh_session.exec(cmd)
+#
+#
+# def shut_all(cfg, ssh_session):
+#     """
+#     Using
+#     :return:
+#     """
+#     cmd = f"cd {cfg['root_path']};"
+#     cmd += (
+#         "docker-compose -f docker-compose.yml -f docker-compose.singularity.yml -f docker-compose.irida_workbench.yml -f "
+#         "docker-compose.irida_ssl.yml down "
+#     )
+#     ssh_session.exec(cmd)
+#
 
-def launch_all(cfg, ssh_session):
-    """
-    Using
-    :return:
-    """
-    cmd = f"cd {cfg['root_path']};"
-    cmd += (
-        "docker-compose -f docker-compose.yml -f docker-compose.singularity.yml -f docker-compose.irida_workbench.yml -f "
-        "docker-compose.irida_ssl.yml up -d "
-    )
-    ssh_session.exec(cmd)
-
-
-def shut_all(cfg, ssh_session):
-    """
-    Using
-    :return:
-    """
-    cmd = f"cd {cfg['root_path']};"
-    cmd += (
-        "docker-compose -f docker-compose.yml -f docker-compose.singularity.yml -f docker-compose.irida_workbench.yml -f "
-        "docker-compose.irida_ssl.yml down "
-    )
-    ssh_session.exec(cmd)
-
-
-FUNC_MAP = {"all": launch_all, "irida_workbench": irida_launch, "galaxy_workbench": galaxy_launch}
+FUNC_MAP = {"irida": irida_launch, "galaxy": galaxy_launch}
 
 
 @click.command()
@@ -52,7 +52,7 @@ FUNC_MAP = {"all": launch_all, "irida_workbench": irida_launch, "galaxy_workbenc
     help=f"Location of the client config files (default={Path.home()}/.okapi.yaml)",
 )
 @click.argument(
-    "instance", type=click.Choice(["all", "irida_workbench", "galaxy_workbench"]), required=True
+    "instance", type=click.Choice(["irida", "galaxy"]), required=True
 )
 def launch(instance, conf):
     """
@@ -60,20 +60,13 @@ def launch(instance, conf):
     \f
     """
     cfg = read_config_file(conf) if conf else read_config_file(CONFIG_DEFAULTS["file"])
-
-    logger.info("Checking if the irida_workbench is up already through their API")
-    irida = irida_factory.create("IRIDA", **cfg["irida_workbench"])
-    irida.test_connection()
-
-    logger.info("Checking if the galaxy_workbench is up already through their API")
-    galaxy = galaxy_factory.create("GALAXY", **cfg["galaxy_workbench"])
-    galaxy.test_connection()
-
     func = FUNC_MAP[instance]
+    import pdb
+    pdb.set_trace()
     ssh_session = (
         SshBasic(cfg[instance])
         if cfg["auth"]["basic_auth"]
         else SshKeyBase(cfg[instance])
     )
 
-    func(cfg, ssh_session)
+    func(cfg[instance], ssh_session)

@@ -12,8 +12,8 @@ class Ssh:
         """
         Initialisation of the class attributes
         """
-        self.username = config["username"]
-        self.host = config["domain"]
+        self.username = config["user"]
+        self.host = config["fqdn"]
         self.client = paramiko.client.SSHClient()
 
     def exec(self, cmd):
@@ -43,8 +43,8 @@ class SshBasic(Ssh):
     """
 
     def __init__(self, config):
-        self.password = config["sanbi_sars_cov_workbench"]["password"]
-        super().__init__(config["sanbi_sars_cov_workbench"])
+        self.password = config["password"]
+        super().__init__(config)
 
     def connect(self):
         self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -66,8 +66,8 @@ class SshKeyBase(Ssh):
     """
 
     def __init__(self, config):
-        self.ssh_key = config["sanbi_sars_cov_workbench"]["ssh_key"]
-        super().__init__(config["sanbi_sars_cov_workbench"])
+        self.ssh_key = config["ssh_key"]
+        super().__init__(config)
 
     def connect(self):
         """Connect with the ssh key"""
