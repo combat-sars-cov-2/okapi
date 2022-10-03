@@ -134,7 +134,7 @@ _Below is an example of how you can instruct your audience on installing and set
 
 Pip Install
 ```sh
-  pip install sanbi-sars-cov-workbench-cli
+  pip install sanbi_sars_cov_workbench-cli
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>

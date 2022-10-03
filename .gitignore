@@ -4,3 +4,6 @@ involucro
 singularity_import
 venv/
 dist/
+*.egg-info/
+.python-version
+artifacts/

@@ -1,0 +1,20 @@
+import click
+
+from src.sanbi_sars_cov_workbench.lib.install.galaxy import commands as galaxy
+from src.sanbi_sars_cov_workbench.lib.install.irida import commands as irida
+
+
+@click.group()
+def install():
+    """
+    Group of sub-commands to install sanbi_sars_cov_workbench tools, plugins, workflows.
+    \f
+    """
+    pass
+
+
+install.add_command(irida.irida_plugins)
+install.add_command(galaxy.galaxy_tools)
+install.add_command(galaxy.singularity_images)
+install.add_command(galaxy.pangolin)
+install.add_command(galaxy.nanopore)
