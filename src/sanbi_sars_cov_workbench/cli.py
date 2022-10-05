@@ -1,7 +1,7 @@
 import click
 
 from src.sanbi_sars_cov_workbench.lib.install import commands as installers
-from src.sanbi_sars_cov_workbench.lib.launch import commands as services
+from src.sanbi_sars_cov_workbench.lib.manage import commands as services
 
 
 @click.group()
@@ -18,4 +18,5 @@ def main(version):
 
 
 main.add_command(installers.install)
-main.add_command(services.launch)
+main.add_command(services.start)
+main.add_command(services.stop)

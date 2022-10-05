@@ -3,11 +3,11 @@ from __future__ import annotations
 
 def launch(cfg, ssh_session):
     """
-    launch irida_workbench instance
+    manage irida_workbench instance
     \f
     """
     cmd = f"cd {cfg['root_path']};"
-    cmd += "docker-compose -f docker-compose.irida_workbench.yml -f docker-compose.irida_ssl.yml up -d"
+    cmd += "docker-compose -f docker-compose.irida.yml -f docker-compose.irida_ssl.yml up -d"
     ssh_session.exec(cmd)
 
 
@@ -19,6 +19,6 @@ def shut(cfg, ssh_session):
 
     cmd = f"cd {cfg['root_path']};"
     cmd += (
-        "docker-compose stop irida_workbench;"
+        "docker-compose stop irida_web;"
     )
     ssh_session.exec(cmd)

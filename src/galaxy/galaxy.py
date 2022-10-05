@@ -3,7 +3,7 @@ from __future__ import annotations
 
 def launch(cfg, ssh_session):
     """
-    launch galaxy_workbench instance
+    manage galaxy_workbench instance
     \f
     """
     cmd = f"cd {cfg['root_path']};"
