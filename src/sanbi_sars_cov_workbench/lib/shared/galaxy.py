@@ -8,7 +8,6 @@ def launch(cfg, ssh_session):
     """
     cmd = f"cd {cfg['root_path']};"
     cmd += "docker-compose -f docker-compose.yml -f docker-compose.singularity.yml up -d"
-
     ssh_session.exec(cmd)
 
 

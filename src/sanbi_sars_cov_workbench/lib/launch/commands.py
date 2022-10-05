@@ -13,34 +13,6 @@ from src.sanbi_sars_cov_workbench.lib.utils.services.galaxy import factory as ga
 from src.sanbi_sars_cov_workbench.lib.utils.services.irida import factory as irida_factory
 
 CONFIG_DEFAULTS = {"file": f"{Path.home()}/.okapi.yaml"}
-
-#
-# def launch_all(cfg, ssh_session):
-#     """
-#     Using
-#     :return:
-#     """
-#     cmd = f"cd {cfg['root_path']};"
-#     cmd += (
-#         "docker-compose -f docker-compose.yml -f docker-compose.singularity.yml -f docker-compose.irida_workbench.yml -f "
-#         "docker-compose.irida_ssl.yml up -d "
-#     )
-#     ssh_session.exec(cmd)
-#
-#
-# def shut_all(cfg, ssh_session):
-#     """
-#     Using
-#     :return:
-#     """
-#     cmd = f"cd {cfg['root_path']};"
-#     cmd += (
-#         "docker-compose -f docker-compose.yml -f docker-compose.singularity.yml -f docker-compose.irida_workbench.yml -f "
-#         "docker-compose.irida_ssl.yml down "
-#     )
-#     ssh_session.exec(cmd)
-#
-
 FUNC_MAP = {"irida": irida_launch, "galaxy": galaxy_launch}
 
 
@@ -61,12 +33,11 @@ def launch(instance, conf):
     """
     cfg = read_config_file(conf) if conf else read_config_file(CONFIG_DEFAULTS["file"])
     func = FUNC_MAP[instance]
-    import pdb
-    pdb.set_trace()
+
     ssh_session = (
         SshBasic(cfg[instance])
         if cfg["auth"]["basic_auth"]
         else SshKeyBase(cfg[instance])
     )
 
-    func(cfg[instance], ssh_session)
+    func(cfg[instance], ssh_session.connect())

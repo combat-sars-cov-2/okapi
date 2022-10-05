@@ -21,6 +21,7 @@ class Ssh:
         Execute a remote command
         :param cmd:
         :return:
+
         """
         logger.info(f"command: {cmd}")
         stdin, stdout, stderr = self.client.exec_command(cmd, get_pty=True)
@@ -56,8 +57,9 @@ class SshBasic(Ssh):
             allow_agent=False,
         )
 
-    def exec(self, cmd):
-        return super().exec(cmd)
+
+    # def exec(self, cmd):
+    #     return super().exec(cmd)
 
 
 class SshKeyBase(Ssh):
