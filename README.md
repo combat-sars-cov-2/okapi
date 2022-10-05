@@ -89,8 +89,8 @@ Workbench-okapi is the toolbelt for managing a workbench (consisting of Galaxy a
 The workbench has the following high level commands:
 * workbench-okapi deploy (coming soon)
 * workbench-okapi install
-* workbench-okapi launch
-* workbench-okapi stop (coming soon)
+* workbench-okapi start
+* workbench-okapi stop
 * workbench-okapi uninstall (coming soon)
 
 Of course, the project will keep developing in fautures and utilities. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this Workbench okapi tool!
@@ -142,23 +142,13 @@ By default `workbench-okapi` looks at the user home directory for the `.okapi.ya
 
 The sample for the config file is as follows:
 ```yaml
-galaxy:
-    description: Galaxy instance
-    fqdn: galaxy.workbench.com
+workbench:
+    description: Workbench instance
+    fqdn: my.workbench.com
     user: ubuntu
     password: "passw0rd"
     ssh_key: ~/identity.pem
-    root_path: /opt/workbench
-    api_client_key: mykey
-    api_client_secret: "LKAJHSKJAKJKHAKJSH"
-
-irida:
-    description: IRIDA instance
-    fqdn: irida.workbench.com
-    user: ubuntu
-    password: "passw0rd"
-    ssh_key: ~/identity.pem
-    root_path: /opt/workbench
+    root_path: /opt/workbench/compose
     api_client_key: mykey
     api_client_secret: "LKAJHSKJAKJKHAKJSH"
 
