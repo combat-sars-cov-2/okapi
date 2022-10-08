@@ -17,6 +17,6 @@ workbench:
     galaxy_api_key: 'GALAXY_API_KEY'
 
 workflows:
-    illumina_version: "0.1.11"
-    nanopore_version: "0.1"
+    illumina_version: "0.1.1"
+    nanopore_version: "0.1.1"
     location_path: "/etc/irida/plugins"

@@ -10,9 +10,7 @@ from src.sanbi_sars_cov_workbench.lib.utils.helpers.misc import (
     download_plugin_assets,
     extract_plugin_jars,
 )
-
-CURRENT_DIR = os.path.dirname(__file__)
-PATH_TO_PLUGINS = os.path.join(CURRENT_DIR, f"artifacts/plugins")
+from src.sanbi_sars_cov_workbench.definitions import PROJECT_PATH_TO_PLUGINS
 
 
 def pre_download_requirements(config):
@@ -45,5 +43,5 @@ def deploy_to_irida(config, ssh_session):
     Copy the irida jar plugins to the irida instance
     @return:
     """
-    files = fnmatch.filter(os.listdir(PATH_TO_PLUGINS), "*.jar")
+    files = fnmatch.filter(os.listdir(PROJECT_PATH_TO_PLUGINS), "*.jar")
     ssh_session.bulk_upload(files, config["workflows"]["location_paths"])

@@ -10,9 +10,7 @@ from src.sanbi_sars_cov_workbench.lib.utils.tools import (
     read_from_plugins,
     install_gx_tools,
 )
-
-CURRENT_DIR = os.path.dirname(__file__)
-PATH_TO_PLUGINS = os.path.join(CURRENT_DIR, f"artifacts/plugins")
+from src.sanbi_sars_cov_workbench.definitions import PROJECT_PATH_TO_PLUGINS
 
 
 @click.command()
@@ -48,7 +46,7 @@ def galaxy_tools(galaxy, user, password, api_key):
     This command installs the tools in galaxy
     """
     logger.info("Install to Galaxy Instance")
-    plugins_tools = read_from_plugins(PATH_TO_PLUGINS)
+    plugins_tools = read_from_plugins(PROJECT_PATH_TO_PLUGINS)
     install_gx_tools(plugins_tools)
 
 
@@ -63,6 +61,3 @@ def install():
 
 install.add_command(irida_plugins)
 install.add_command(galaxy_tools)
-
-# For Deploy
-# install.add_command(galaxy.singularity_images)

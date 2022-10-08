@@ -1,21 +1,13 @@
 import os
 import subprocess
 import urllib
-
 import click
 import yaml
+
 from github import GithubException
 from loguru import logger
 from tqdm.auto import tqdm
-
-CURRENT_DIR = os.path.dirname(__file__)
-PATH_TO_PLUGINS = os.path.join(CURRENT_DIR, f"artifacts/plugins")
-
-
-def set_global_vars(path_to_plugins, current_dir):
-    global PATH_TO_PLUGINS, CURRENT_DIR
-    PATH_TO_PLUGINS = path_to_plugins
-    CURRENT_DIR = current_dir
+from src.sanbi_sars_cov_workbench.definitions import PROJECT_PATH_TO_PLUGINS
 
 
 def ensure_dir(file_path):
@@ -36,7 +28,7 @@ def unzip(file_name):
 
     logger.info(f"Processing: {file_name} into: {o_dir}")
 
-    command = f"unzip -o -q {os.path.join(PATH_TO_PLUGINS, file_name)} -d {o_dir}"
+    command = f"unzip -o -q {os.path.join(PROJECT_PATH_TO_PLUGINS, file_name)} -d {o_dir}"
     process = subprocess.Popen(command, shell=True)
     os.waitpid(process.pid, 0)[1]
 
@@ -51,7 +43,7 @@ def walk_files(dir_name):
 
     dirs = os.walk(dir_name)
 
-    for (dir_path, file_names) in dirs:
+    for (dir_path, _, file_names) in dirs:
         for file_name in file_names:
             if is_archive(file_name):
                 unzip(os.path.join(dir_path, file_name))
@@ -72,7 +64,7 @@ def get_expanded_dir_name(file_name):
     Get the expanded directory name
     """
     base_name = f"{os.path.basename(file_name)}.contents"
-    return os.path.join(PATH_TO_PLUGINS, base_name)
+    return os.path.join(PROJECT_PATH_TO_PLUGINS, base_name)
 
 
 def download_plugin_assets(g, plugin_versions):
@@ -101,7 +93,7 @@ def download_plugin_assets(g, plugin_versions):
                 logger.info(f"IRIDA Plugin Jar: {asset.browser_download_url}")
 
                 response = getattr(urllib, "request", urllib).urlopen(asset.browser_download_url)
-                file_name = os.path.join(CURRENT_DIR, f"artifacts/{asset.name}")
+                file_name = os.path.join(f"{PROJECT_PATH_TO_PLUGINS}/{asset.name}")
 
                 ensure_dir(file_name)
                 with tqdm.wrapattr(
@@ -117,7 +109,9 @@ def download_plugin_assets(g, plugin_versions):
 
 
 def extract_plugin_jars():
-    file_names = [f for f in os.listdir(PATH_TO_PLUGINS) if os.path.isfile(os.path.join(PATH_TO_PLUGINS, f))]
+    file_names = [
+        f for f in os.listdir(PROJECT_PATH_TO_PLUGINS) if os.path.isfile(os.path.join(PROJECT_PATH_TO_PLUGINS, f))
+    ]
     for file_name in file_names:
         unzip(file_name)
 
