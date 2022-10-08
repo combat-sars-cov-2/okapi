@@ -38,7 +38,7 @@ def unzip(file_name):
 
     command = f"unzip -o -q {os.path.join(PATH_TO_PLUGINS, file_name)} -d {o_dir}"
     process = subprocess.Popen(command, shell=True)
-    status = os.waitpid(process.pid, 0)[1]
+    os.waitpid(process.pid, 0)[1]
 
     walk_files(o_dir)
 
@@ -51,7 +51,7 @@ def walk_files(dir_name):
 
     dirs = os.walk(dir_name)
 
-    for (dir_path, dir_names, file_names) in dirs:
+    for (dir_path, file_names) in dirs:
         for file_name in file_names:
             if is_archive(file_name):
                 unzip(os.path.join(dir_path, file_name))
@@ -84,17 +84,13 @@ def download_plugin_assets(g, plugin_versions):
                 try:
                     release = repo.get_latest_release()
                 except GithubException as e:
-                    logger.error(
-                        "Error, seems we can't find the latest release package"
-                    )
+                    logger.error("Error, seems we can't find the latest release package")
                     raise click.ClickException(f"Something went wrong: {repr(e)}")
             else:
                 try:
                     release = repo.get_release(version)
                 except GithubException as e:
-                    logger.error(
-                        f"Error, seems we can't find {version} release package"
-                    )
+                    logger.error(f"Error, seems we can't find {version} release package")
                     raise click.ClickException(f"Something went wrong: {repr(e)}")
 
             if release is None:
@@ -104,9 +100,7 @@ def download_plugin_assets(g, plugin_versions):
             for asset in release.get_assets():
                 logger.info(f"IRIDA Plugin Jar: {asset.browser_download_url}")
 
-                response = getattr(urllib, "request", urllib).urlopen(
-                    asset.browser_download_url
-                )
+                response = getattr(urllib, "request", urllib).urlopen(asset.browser_download_url)
                 file_name = os.path.join(CURRENT_DIR, f"artifacts/{asset.name}")
 
                 ensure_dir(file_name)
@@ -123,11 +117,7 @@ def download_plugin_assets(g, plugin_versions):
 
 
 def extract_plugin_jars():
-    file_names = [
-        f
-        for f in os.listdir(PATH_TO_PLUGINS)
-        if os.path.isfile(os.path.join(PATH_TO_PLUGINS, f))
-    ]
+    file_names = [f for f in os.listdir(PATH_TO_PLUGINS) if os.path.isfile(os.path.join(PATH_TO_PLUGINS, f))]
     for file_name in file_names:
         unzip(file_name)
 

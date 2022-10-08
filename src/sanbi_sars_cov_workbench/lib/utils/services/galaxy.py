@@ -1,4 +1,6 @@
-from src.sanbi_sars_cov_workbench.lib.utils.services.factory import ServiceFactory
+from src.sanbi_sars_cov_workbench.lib.utils.services.factory import (
+    ServiceFactory,
+)
 
 
 class GalaxyService(ServiceFactory):

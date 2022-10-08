@@ -12,11 +12,7 @@ this = sys.modules[__name__]
 
 
 def read_from_plugins(irida_plugin_path):
-    file_names = [
-        f
-        for f in os.listdir(irida_plugin_path)
-        if os.path.isfile(os.path.join(irida_plugin_path, f))
-    ]
+    file_names = [f for f in os.listdir(irida_plugin_path) if os.path.isfile(os.path.join(irida_plugin_path, f))]
 
     tool_files = [get_fullpath_for_tool_yaml(f, irida_plugin_path) for f in file_names]
     return [read_tool_set_file(file) for file in tool_files]
@@ -24,9 +20,7 @@ def read_from_plugins(irida_plugin_path):
 
 def get_fullpath_for_tool_yaml(file, irida_plugin_path):
     """path to the tool yaml file"""
-    base_dir = os.path.join(
-        irida_plugin_path, os.path.join(file + ".contents", "workflows/")
-    )
+    base_dir = os.path.join(irida_plugin_path, os.path.join(file + ".contents", "workflows/"))
     dirs = os.walk(base_dir)
     dd = [dir_names for dir_names in sorted(dirs)]
     return os.path.join(dd[-1][0], "tools.yaml")
@@ -52,7 +46,7 @@ def install_gx_tools(plugins_tools, galaxy, user, password, api_key):
                     f'--skip_install_repository_dependencies --name "{t["name"]}" --owner "{t["owner"]}" --revisions {" ".join(t["revisions"])} --section_label "{t["tool_panel_section_label"]}"'
                 )
                 process = subprocess.Popen(command, shell=True)
-                status = os.waitpid(process.pid, 0)[1]
+                os.waitpid(process.pid, 0)[1]
             except Exception as e:
                 logger.error(f"Error, while trying to install {t['name']}")
                 raise click.ClickException(f"Something went wrong: {repr(e)}")

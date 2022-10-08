@@ -38,7 +38,7 @@ Irida/Galaxy workbench related tasks automated. Galaxy &amp; Irida server, manag
   <h3 align="center">Workbench Okapi</h3>
 
   <p align="center">
-    A getting started DOCUMENTATION for the Workbench okapi 
+    A getting started DOCUMENTATION for the Workbench okapi
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
@@ -133,10 +133,10 @@ Pip Install
 ```sh
   pip install workbench-cli
 ```
-### Configuration 
+### Configuration
 A YAML conf file will be needed to be passed `$ workbench-cli launch -c <conf_file location> <service>`when launching services on the workbench via the workbench-cli tool.
 
-By default `workbench-cli` looks at the user home directory for the `workbench.yaml` file. 
+By default `workbench-cli` looks at the user home directory for the `workbench.yaml` file.
 
 The sample for the config file is as follows:
 ```yaml
@@ -243,7 +243,7 @@ Use this space to list resources you find helpful and would like to give credit 
 -->
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links 
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
 [contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge

@@ -3,7 +3,9 @@ import paramiko
 from pathlib import Path
 from loguru import logger
 from typing import List
-from src.sanbi_sars_cov_workbench.lib.utils.helpers.misc import read_config_file
+from src.sanbi_sars_cov_workbench.lib.utils.helpers.misc import (
+    read_config_file,
+)
 
 # from paramiko.auth_handler import AuthenticationException, SSHException
 from scp import SCPClient, SCPException
@@ -32,7 +34,7 @@ class Ssh:
 
         """
         logger.info(f"command: {cmd}")
-        stdin, stdout, stderr = self.client.exec_command(cmd, get_pty=True)
+        stdout = self.client.exec_command(cmd, get_pty=True)
         for line in iter(stdout.readline, ""):
             logger.debug(line, end="")
         logger.info("finished.")
@@ -46,9 +48,7 @@ class Ssh:
         """
         try:
             self.scp.put(filepaths, remote_path=remote_path, recursive=True)
-            logger.info(
-                f"Finished uploading {len(filepaths)} files to {remote_path} on {self.host}"
-            )
+            logger.info(f"Finished uploading {len(filepaths)} files to {remote_path} on {self.host}")
         except SCPException as e:
             logger.error(f"SCPException during bulk upload: {e}")
         except Exception as e:
@@ -126,15 +126,7 @@ class SshSession:
         Creates an ssh object and returns that for further ssh execution
         @rtype: ssh Object
         """
-        cfg = (
-            read_config_file(self.conf)
-            if self.conf
-            else read_config_file(CONFIG_DEFAULTS["file"])
-        )
-        ssh_session = (
-            SshBasic(cfg["workbench"])
-            if cfg["auth"]["basic_auth"]
-            else SshKeyBase(cfg["workbench"])
-        )
+        cfg = read_config_file(self.conf) if self.conf else read_config_file(CONFIG_DEFAULTS["file"])
+        ssh_session = SshBasic(cfg["workbench"]) if cfg["auth"]["basic_auth"] else SshKeyBase(cfg["workbench"])
         ssh_session.connect()
         return cfg, ssh_session

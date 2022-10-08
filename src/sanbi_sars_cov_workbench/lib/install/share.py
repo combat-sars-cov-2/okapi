@@ -1,4 +1,6 @@
-import click, os, fnmatch
+import click
+import os
+import fnmatch
 import subprocess
 
 from github import Github, GithubException

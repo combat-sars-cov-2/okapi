@@ -42,9 +42,7 @@ def irida_plugins(conf):
     help="The username to use accessing the galaxy instance",
 )
 @click.option("--password", default="password", help="Password for the user")
-@click.option(
-    "--api-key", default="fakekey", help="API Key token generated for the user"
-)
+@click.option("--api-key", default="fakekey", help="API Key token generated for the user")
 def galaxy_tools(galaxy, user, password, api_key):
     """
     This command installs the tools in galaxy
