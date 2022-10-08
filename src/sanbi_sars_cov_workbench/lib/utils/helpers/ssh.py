@@ -4,6 +4,7 @@ from pathlib import Path
 from loguru import logger
 from typing import List
 from src.sanbi_sars_cov_workbench.lib.utils.helpers.misc import read_config_file
+
 # from paramiko.auth_handler import AuthenticationException, SSHException
 from scp import SCPClient, SCPException
 
@@ -44,22 +45,14 @@ class Ssh:
         :param List[str] filepaths: List of local files to be uploaded.
         """
         try:
-            self.scp.put(
-                filepaths,
-                remote_path=remote_path,
-                recursive=True
-            )
+            self.scp.put(filepaths, remote_path=remote_path, recursive=True)
             logger.info(
                 f"Finished uploading {len(filepaths)} files to {remote_path} on {self.host}"
             )
         except SCPException as e:
-            logger.error(
-                f"SCPException during bulk upload: {e}"
-            )
+            logger.error(f"SCPException during bulk upload: {e}")
         except Exception as e:
-            logger.error(
-                f"Unexpected exception during bulk upload: {e}"
-            )
+            logger.error(f"Unexpected exception during bulk upload: {e}")
 
     def close(self):
         """
@@ -133,11 +126,15 @@ class SshSession:
         Creates an ssh object and returns that for further ssh execution
         @rtype: ssh Object
         """
-        cfg = read_config_file(self.conf) if self.conf else read_config_file(CONFIG_DEFAULTS["file"])
+        cfg = (
+            read_config_file(self.conf)
+            if self.conf
+            else read_config_file(CONFIG_DEFAULTS["file"])
+        )
         ssh_session = (
-            SshBasic(cfg['workbench'])
+            SshBasic(cfg["workbench"])
             if cfg["auth"]["basic_auth"]
-            else SshKeyBase(cfg['workbench'])
+            else SshKeyBase(cfg["workbench"])
         )
         ssh_session.connect()
         return cfg, ssh_session

@@ -111,11 +111,11 @@ def download_plugin_assets(g, plugin_versions):
 
                 ensure_dir(file_name)
                 with tqdm.wrapattr(
-                        open(file_name, "wb"),
-                        "write",
-                        miniters=1,
-                        desc=asset.browser_download_url.split("/")[-1],
-                        total=getattr(response, "length", None),
+                    open(file_name, "wb"),
+                    "write",
+                    miniters=1,
+                    desc=asset.browser_download_url.split("/")[-1],
+                    total=getattr(response, "length", None),
                 ) as fout:
                     for chunk in response:
                         fout.write(chunk)

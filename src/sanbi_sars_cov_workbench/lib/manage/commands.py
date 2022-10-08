@@ -50,7 +50,7 @@ def start(conf):
     """
     ssh = SshSession(conf)
     config, ssh_session = ssh.get_ssh_session()
-    start_up(config['workbench'], ssh_session)
+    start_up(config["workbench"], ssh_session)
 
 
 @click.command()
@@ -67,4 +67,4 @@ def stop(conf):
     """
     ssh = SshSession(conf)
     config, ssh_session = ssh.get_ssh_session()
-    shut_all(config['workbench'], ssh_session)
+    shut_all(config["workbench"], ssh_session)

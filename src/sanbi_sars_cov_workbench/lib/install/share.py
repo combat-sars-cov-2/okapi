@@ -4,7 +4,10 @@ import subprocess
 from github import Github, GithubException
 from loguru import logger
 
-from src.sanbi_sars_cov_workbench.lib.utils.helpers.misc import download_plugin_assets, extract_plugin_jars
+from src.sanbi_sars_cov_workbench.lib.utils.helpers.misc import (
+    download_plugin_assets,
+    extract_plugin_jars,
+)
 
 CURRENT_DIR = os.path.dirname(__file__)
 PATH_TO_PLUGINS = os.path.join(CURRENT_DIR, f"artifacts/plugins")
@@ -18,8 +21,8 @@ def pre_download_requirements(config):
         raise click.ClickException(f"Something went wrong: {repr(e)}")
 
     plugin_versions = {
-        "irida-plugin-sars-cov-2-illumina": config['workflows']['illumina_version'],
-        "irida-plugin-sars-cov-2-nanopore": config['workflows']['nanopore_version'],
+        "irida-plugin-sars-cov-2-illumina": config["workflows"]["illumina_version"],
+        "irida-plugin-sars-cov-2-nanopore": config["workflows"]["nanopore_version"],
     }
     return g, plugin_versions
 
@@ -40,5 +43,5 @@ def deploy_to_irida(config, ssh_session):
     Copy the irida jar plugins to the irida instance
     @return:
     """
-    files = fnmatch.filter(os.listdir(PATH_TO_PLUGINS), '*.jar')
-    ssh_session.bulk_upload(files, config['workflows']['location_paths'])
+    files = fnmatch.filter(os.listdir(PATH_TO_PLUGINS), "*.jar")
+    ssh_session.bulk_upload(files, config["workflows"]["location_paths"])

@@ -6,7 +6,10 @@ from pathlib import Path
 from decouple import config
 from .share import *
 from src.sanbi_sars_cov_workbench.lib.utils.helpers.ssh import SshSession
-from src.sanbi_sars_cov_workbench.lib.utils.tools import read_from_plugins, install_gx_tools
+from src.sanbi_sars_cov_workbench.lib.utils.tools import (
+    read_from_plugins,
+    install_gx_tools,
+)
 
 CURRENT_DIR = os.path.dirname(__file__)
 PATH_TO_PLUGINS = os.path.join(CURRENT_DIR, f"artifacts/plugins")
@@ -25,9 +28,13 @@ def irida_plugins(conf):
     config, ssh_session = ssh.get_ssh_session()
     download_jar(config, ssh_session)
     deploy_to_irida(config, ssh_session)
+
+
 @click.command()
 @click.option(
-    "--galaxy", default="http://my.workbench.org:90", help="The targeted Galaxy instance"
+    "--galaxy",
+    default="http://my.workbench.org:90",
+    help="The targeted Galaxy instance",
 )
 @click.option(
     "--user",
@@ -45,6 +52,7 @@ def galaxy_tools(galaxy, user, password, api_key):
     logger.info("Install to Galaxy Instance")
     plugins_tools = read_from_plugins(PATH_TO_PLUGINS)
     install_gx_tools(plugins_tools)
+
 
 @click.group()
 def install():

@@ -2,6 +2,7 @@ import sys
 
 import click
 from bioblend import toolshed
+
 # this is a pointer to the module object instance itself.
 from loguru import logger
 
