@@ -8,8 +8,8 @@ from github import GithubException
 from loguru import logger
 from tqdm.auto import tqdm
 
-CURRENT_DIR = ""
-PATH_TO_PLUGINS = ""
+CURRENT_DIR = os.path.dirname(__file__)
+PATH_TO_PLUGINS = os.path.join(CURRENT_DIR, f"artifacts/plugins")
 
 
 def set_global_vars(path_to_plugins, current_dir):
@@ -107,7 +107,7 @@ def download_plugin_assets(g, plugin_versions):
                 response = getattr(urllib, "request", urllib).urlopen(
                     asset.browser_download_url
                 )
-                file_name = os.path.join(CURRENT_DIR, f"sources/plugins/{asset.name}")
+                file_name = os.path.join(CURRENT_DIR, f"artifacts/{asset.name}")
 
                 ensure_dir(file_name)
                 with tqdm.wrapattr(

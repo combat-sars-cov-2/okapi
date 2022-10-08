@@ -1,13 +1,11 @@
 from __future__ import annotations
 
-from pathlib import Path
-
 import click
 
-from src.sanbi_sars_cov_workbench.lib.utils.helpers.misc import read_config_file
-from src.sanbi_sars_cov_workbench.lib.utils.helpers.ssh import SshBasic, SshKeyBase
+from pathlib import Path
+from src.sanbi_sars_cov_workbench.lib.utils.helpers.ssh import SshSession
 
-CONFIG_DEFAULTS = {"file": f"{Path.home()}/.okapi.yaml"}
+CONFIG_DEFAULTS = {"file": f"{Path.home()}/.workbench.yaml"}
 
 
 def start_up(cfg, ssh_session):
@@ -43,22 +41,16 @@ def shut_all(cfg, ssh_session):
     "-c",
     "--conf",
     type=click.Path(exists=True),
-    help=f"Location of the client config files (default={Path.home()}/.okapi.yaml)",
+    help=f"Location of the client config files (default={Path.home()}/.workbench.yaml)",
 )
 def start(conf):
     """
     Start up all the workbench components (docker containers)
     \f
     """
-    cfg = read_config_file(conf) if conf else read_config_file(CONFIG_DEFAULTS["file"])
-
-    ssh_session = (
-        SshBasic(cfg['workbench'])
-        if cfg["auth"]["basic_auth"]
-        else SshKeyBase(cfg['workbench'])
-    )
-    ssh_session.connect()
-    start_up(cfg['workbench'], ssh_session)
+    ssh = SshSession(conf)
+    config, ssh_session = ssh.get_ssh_session()
+    start_up(config['workbench'], ssh_session)
 
 
 @click.command()
@@ -66,19 +58,13 @@ def start(conf):
     "-c",
     "--conf",
     type=click.Path(exists=True),
-    help=f"Location of the client config files (default={Path.home()}/.okapi.yaml)",
+    help=f"Location of the client config files (default={Path.home()}/.workbench.yaml)",
 )
 def stop(conf):
     """
     Stop all the workbench components (docker containers)
     \f
     """
-    cfg = read_config_file(conf) if conf else read_config_file(CONFIG_DEFAULTS["file"])
-
-    ssh_session = (
-        SshBasic(cfg['workbench'])
-        if cfg["auth"]["basic_auth"]
-        else SshKeyBase(cfg['workbench'])
-    )
-    ssh_session.connect()
-    shut_all(cfg['workbench'], ssh_session)
+    ssh = SshSession(conf)
+    config, ssh_session = ssh.get_ssh_session()
+    shut_all(config['workbench'], ssh_session)

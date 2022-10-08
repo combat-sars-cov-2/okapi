@@ -1,15 +1,23 @@
 # ================================================================
 # Workbench instance information
 # ================================================================
+auth:
+    basic_auth: True
+
 workbench:
-    description: Galaxy instance
-    fqdn: galaxy.workbench.com
+    description: Workbench instance
+    fqdn: my.workbench.com
     user: ubuntu
     password: "passw0rd"
     ssh_key: ~/identity.pem
     root_path: /opt/workbench/compose
-    api_client_key: mykey
-    api_client_secret: "LKAJHSKJAKJKHAKJSH"
+    irida_api_client_id: "MYCLIENT_ID"
+    irida_api_client_secret: "IRIDA_SECRET_KEY"
+    galaxy_user: admin@galaxy.org
+    galaxy_api_key: 'GALAXY_API_KEY'
 
-auth:
-    basic_auth: True
+workflows:
+    illumina_version: "0.1.11"
+    nanopore_version: "0.1"
+    location_path: "/etc/irida/plugins"
+

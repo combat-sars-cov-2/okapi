@@ -1,4 +1,4 @@
-# Workbench-okapi
+# Workbench-CLI
 Irida/Galaxy workbench related tasks automated. Galaxy &amp; Irida server, management cli toolset
 
 <div id="top"></div>
@@ -43,9 +43,9 @@ Irida/Galaxy workbench related tasks automated. Galaxy &amp; Irida server, manag
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/combat-sars-cov-2/Workbench-okapi/issues">Report Bug</a>
+    <a href="https://github.com/combat-sars-cov-2/workbench-cli/issues">Report Bug</a>
     ·
-    <a href="https://github.com/combat-sars-cov-2/Workbench-okapi/issues">Request Feature</a>
+    <a href="https://github.com/combat-sars-cov-2/workbench-cli/issues">Request Feature</a>
   </p>
 </div>
 
@@ -80,22 +80,20 @@ Irida/Galaxy workbench related tasks automated. Galaxy &amp; Irida server, manag
 
 
 <!-- ABOUT WORKBENCH -->
-## About Workbench Okapi
+## About Workbench CLI
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Workbench-okapi is the toolbelt for managing a workbench (consisting of Galaxy and IRIDA) pioneered by SANBI - UWC team.
+Workbench-cli is the toolbelt for managing a workbench (consisting of Galaxy and IRIDA) pioneered by SANBI - UWC team.
 
 The workbench has the following high level commands:
-* workbench-okapi deploy (coming soon)
-* workbench-okapi install
-* workbench-okapi start
-* workbench-okapi stop
-* workbench-okapi uninstall (coming soon)
+* workbench-cli deploy (coming soon)
+* workbench-cli install
+* workbench-cli start
+* workbench-cli stop
+* workbench-cli uninstall (coming soon)
 
 Of course, the project will keep developing in fautures and utilities. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this Workbench okapi tool!
-
-Use the `BLANK_README.md` to get started (for contributions - dev, tests, documentation).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -133,15 +131,17 @@ _Below is an example of how you can instruct your audience on installing and set
 
 Pip Install
 ```sh
-  pip install workbench-okapi
+  pip install workbench-cli
 ```
 ### Configuration 
-A YAML conf file will be needed to be passed `$ workbench-okapi launch -c <conf_file location> <service>`when launching services on the workbench via the workbench-okapi tool.
+A YAML conf file will be needed to be passed `$ workbench-cli launch -c <conf_file location> <service>`when launching services on the workbench via the workbench-cli tool.
 
-By default `workbench-okapi` looks at the user home directory for the `.okapi.yaml` file. 
+By default `workbench-cli` looks at the user home directory for the `workbench.yaml` file. 
 
 The sample for the config file is as follows:
 ```yaml
+auth:
+    basic_auth: True
 workbench:
     description: Workbench instance
     fqdn: my.workbench.com
@@ -149,11 +149,10 @@ workbench:
     password: "passw0rd"
     ssh_key: ~/identity.pem
     root_path: /opt/workbench/compose
-    api_client_key: mykey
-    api_client_secret: "LKAJHSKJAKJKHAKJSH"
-
-auth:
-    basic_auth: True
+    irida_api_client_id: "my_client_id"
+    irida_api_client_secret: "LKAJHSKJAKJKHAKJSH"
+    galaxy_user: "admin@galaxy.org"
+    galaxy_api_key: "APIKEY"
 
 ```
 <p align="right">(<a href="#top">back to top</a>)</p>

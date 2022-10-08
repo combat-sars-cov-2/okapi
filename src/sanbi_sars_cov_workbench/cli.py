@@ -17,6 +17,6 @@ def main(version):
     pass
 
 
-main.add_command(installers.install)
 main.add_command(services.start)
 main.add_command(services.stop)
+main.add_command(installers.install)

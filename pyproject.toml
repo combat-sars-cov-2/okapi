@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "okapi"
+name = "workbench-cli"
 version = "0.0.1"
 authors = [
   { name="Zipho Mashologu", email="zipho@sanbi.ac.za" },

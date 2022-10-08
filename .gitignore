@@ -6,4 +6,4 @@ venv/
 dist/
 *.egg-info/
 .python-version
-artifacts/
+src/sanbi_sars_cov_workbench/lib/install/artifacts/
