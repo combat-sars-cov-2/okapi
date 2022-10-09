@@ -72,3 +72,6 @@ whitenoise==6.0.0
 wrapt==1.14.1
 write==2020.12.3
 zipstream-new==1.1.8
+
+scp~=0.14.4
+setuptools~=60.2.0

@@ -6,8 +6,6 @@ import click
 import yaml
 from loguru import logger
 
-# from toolshed import complete_metadata
-
 this = sys.modules[__name__]
 
 
@@ -23,8 +21,6 @@ def get_fullpath_for_tool_yaml(file, irida_plugin_path):
     base_dir = os.path.join(irida_plugin_path, os.path.join(file + ".contents", "workflows/"))
     dirs = os.walk(base_dir)
     dd = [dir_names for dir_names in sorted(dirs)]
-    # import pdb
-    # pdb.set_trace()
     return os.path.join(dd[-1][0], "tools.yaml")
 
 

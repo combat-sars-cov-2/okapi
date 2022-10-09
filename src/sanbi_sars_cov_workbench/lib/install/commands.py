@@ -47,7 +47,7 @@ def galaxy_tools(galaxy, user, password, api_key):
     """
     logger.info("Install to Galaxy Instance")
     plugins_tools = read_from_plugins(PROJECT_PATH_TO_PLUGINS)
-    install_gx_tools(plugins_tools)
+    install_gx_tools(plugins_tools, galaxy, user, password, api_key)
 
 
 @click.group()

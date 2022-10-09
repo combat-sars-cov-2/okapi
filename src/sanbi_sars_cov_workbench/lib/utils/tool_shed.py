@@ -10,11 +10,11 @@ this = sys.modules[__name__]
 
 
 def basic_metadata(tool_entry):
-    ts = toolshed.ToolShedInstance(url=tool_entry["toolshed_url"])
+    ts = toolshed.ToolShedInstance(url=tool_entry["tool_shed_url"])
     return ts.repositories.get_repository_revision_install_info(
-        tool_entry["tool_name"],
-        tool_entry["tool_author"],
-        tool_entry["tool_revision"],
+        tool_entry["name"],
+        tool_entry["owner"],
+        tool_entry["revisions"][-1],
     )
 
 
@@ -34,8 +34,7 @@ def complete_metadata(tool):
                     if "version" in requirement:
                         spec_str = f'{requirement["name"]}=={requirement["version"]}'
                         spec_strs.append(spec_str)
-                        print(spec_str)
                     else:
                         logger.error(f"Unversioned Error, no tool specified to fetch data. {requirement['name']}")
 
-            print(",".join(spec_strs))
+            return ",".join(spec_strs)
