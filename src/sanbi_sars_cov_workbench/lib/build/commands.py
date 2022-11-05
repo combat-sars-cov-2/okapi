@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import click
-import os
 
 from github import Github, GithubException
 from loguru import logger
