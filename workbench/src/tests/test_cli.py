@@ -15,7 +15,7 @@ def test_runas_module():
     """
     Can this package be run as a Python module?
     """
-    result = shell("python -m workbench-cli --help")
+    result = shell("python -m workbench.src.cli --help")
     assert result.exit_code == 0
 
 
@@ -23,21 +23,19 @@ def test_entrypoint():
     """
     Is entrypoint script installed? (setup.py)
     """
-    result = shell("workbench-cli --help")
+    result = shell("workbench --help")
     assert result.exit_code == 0
 
 
-def test_version():
+def test_version_command():
     """
     Does --version display information as expected?
     """
-    expected_version = version("workbench-cli")
-    import pdb
+    # expected_version = version("workbench -v")
+    expected_version = cli.__version__
+    result = shell("workbench --version")
 
-    pdb.set_trace()
-    result = shell("workbench-cli --version")
-
-    assert result.stdout == f"workbench-cli, version {expected_version}{linesep}"
+    assert result.stdout == f"workbench, version {expected_version}{linesep}"
     assert result.exit_code == 0
 
 
@@ -45,7 +43,7 @@ def test_example_command():
     """
     Is command available?
     """
-    result = shell("workbench-cli example --help")
+    result = shell("workbench start --help")
     assert result.exit_code == 0
 
 
@@ -62,4 +60,4 @@ def test_cli():
     runner = CliRunner()
     result = runner.invoke(cli.main)
 
-    assert result.exit_code != 0
+    assert result.exit_code == 0
