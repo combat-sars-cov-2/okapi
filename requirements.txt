@@ -72,6 +72,7 @@ whitenoise==6.0.0
 wrapt==1.14.1
 write==2020.12.3
 zipstream-new==1.1.8
-
+cli-test-helpers==3.1.0
+pytest==7.2.0
 scp~=0.14.4
 setuptools~=60.2.0

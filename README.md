@@ -112,6 +112,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- GETTING STARTED -->
 ## Getting Started
 
+
 This is a cli tool to manage your Workbench (Galaxy and IRIDA) for various microbacterial pathogens.
 
 To get a local copy up and running follow these simple example steps.
