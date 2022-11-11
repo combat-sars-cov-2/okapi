@@ -1,0 +1,77 @@
+install_tool_dependencies: True
+install_repository_dependencies: True
+install_resolver_dependencies: True
+
+tools:
+- name: artic_guppyplex
+  owner: iuc
+  revisions:
+  - 372def2f8fd6
+  tool_panel_section_label: Workflow_tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: fastqc
+  owner: devteam
+  revisions:
+  - 3d0c7bdf12f5
+  tool_panel_section_label: Workflow_tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: artic_minion
+  owner: iuc
+  revisions:
+  - 6f52ebc01098
+  tool_panel_section_label: Workflow_tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bcftools_view
+  owner: iuc
+  revisions:
+  - e1a2389af238
+  tool_panel_section_label: Workflow_tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions:
+  - f46f0e4f75c4
+  tool_panel_section_label: Workflow_tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: picard
+  owner: devteam
+  revisions:
+  - 1aac2a13842a
+  tool_panel_section_label: Workflow_tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: jvarkit_wgscoverageplotter
+  owner: iuc
+  revisions:
+  - ac048a34cac3
+  tool_panel_section_label: Workflow_tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: snpeff_sars_cov_2
+  owner: iuc
+  revisions:
+  - 2a3a00c1fa0a
+  tool_panel_section_label: Workflow_tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: pangolin
+  owner: iuc
+  revisions:
+  - 81804a978fc0
+  tool_panel_section_label: Workflow_tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: nextclade
+  owner: iuc
+  revisions:
+  - 9e10ba792be2
+  tool_panel_section_label: Workflow_tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: qualimap_bamqc
+  owner: iuc
+  revisions:
+  - 19ece8afbaab
+  tool_panel_section_label: Workflow_tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: multiqc
+  owner: iuc
+  revisions:
+  - 9a913cdee30e
+  tool_panel_section_label: Workflow_tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
