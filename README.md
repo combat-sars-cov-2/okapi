@@ -35,7 +35,7 @@ Irida/Galaxy workbench related tasks automated. Galaxy &amp; Irida server, manag
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Workbench Okapi</h3>
+  <h3 align="center">Workbench CLI</h3>
 
   <p align="center">
     A getting started DOCUMENTATION for the Workbench okapi
