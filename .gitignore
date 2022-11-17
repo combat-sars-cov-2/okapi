@@ -6,4 +6,11 @@ venv/
 dist/
 *.egg-info/
 .python-version
-src/sanbi_sars_cov_workbench/artifacts/
+workbench/src/artifacts/
+workbench/__pycache__/
+workbench/src/__pycache__/
+workbench/src/tests/__pycache__/
+.coverage
+.tox/
+pip-wheel-metadata/
+.run/

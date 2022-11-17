@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iridaWorkflow>
+  <id>fe8bfdc1-bf00-49e0-bfbd-7c0f9f0c927a</id>
+  <name>Artic_Illumina</name>
+  <version>0.1.11</version>
+  <analysisType>ARTICILLUMINA_PIPELINE</analysisType>
+  <inputs>
+    <sequenceReadsPaired>sequence_reads_list_paired</sequenceReadsPaired>
+    <reference>reference</reference>
+    <requiresSingleSample>true</requiresSingleSample>
+  </inputs>
+  <parameters>
+    <parameter name="samtools_view-6-mode.filter_config.quality" defaultValue="20">
+      <toolParameter toolId="622f67e3-3756-412d-b92f-80826e5ae9cc" parameterName="Mapping: Minimum mapping quality"/>
+    </parameter>
+    <parameter name="ivar_trim-7-primer.cached_bed" defaultValue="SARS-CoV-2-ARTICv3">
+      <toolParameter toolId="3afb1ed0-ee37-4cce-905a-fbcb987f3c26" parameterName="Primer scheme name"/>
+    </parameter>
+    <parameter name="ivar_trim-7-amplicons.filter_by" defaultValue="true">
+      <toolParameter toolId="3afb1ed0-ee37-4cce-905a-fbcb987f3c26" parameterName="Remove reads that extend past amplicon boundaries"/>
+    </parameter>
+    <parameter name="ivar_variants-9-min_qual" defaultValue="20">
+      <toolParameter toolId="49c2523d-168a-4040-8112-9037689c1ce0" parameterName="Variants: Minimum quality score threshold to count base"/>
+    </parameter>
+    <parameter name="ivar_variants-9-min_freq" defaultValue="0.03">
+      <toolParameter toolId="49c2523d-168a-4040-8112-9037689c1ce0" parameterName="Variants: Minimum frequency threshold"/>
+    </parameter>
+    <parameter name="ivar_variants-9-output_format.pass_only" defaultValue="false">
+      <toolParameter toolId="49c2523d-168a-4040-8112-9037689c1ce0" parameterName="Only output variants that pass all filters"/>
+    </parameter>
+    <parameter name="ivar_consensus-16-min_qual" defaultValue="20">
+      <toolParameter toolId="e0c4590f-dd10-4cdb-8424-83cc0f29302f" parameterName="Consensus: Minimum quality score threshold to count base"/>
+    </parameter>
+    <parameter name="ivar_consensus-16-min_freq" defaultValue="0.8">
+      <toolParameter toolId="e0c4590f-dd10-4cdb-8424-83cc0f29302f" parameterName="Consensus: Minimum frequency threshold"/>
+    </parameter>
+    <parameter name="ivar_consensus-16-min_depth" defaultValue="50">
+      <toolParameter toolId="e0c4590f-dd10-4cdb-8424-83cc0f29302f" parameterName="Consensus: Minimum read depth for consensus"/>
+    </parameter>
+    <parameter name="pangolin-14-db.source" defaultValue="default">
+      <toolParameter toolId="a73c471c-aac8-47d4-9d28-ab0a50154c94" parameterName="db.source" label="Pangolin database source" type="select"/>
+    </parameter>
+    <parameter name="jvarkit_wgscoverageplotter-12-adv.min_mapq" defaultValue="1">
+      <toolParameter toolId="5d3bef0d-fa3f-4733-a077-59f31dce3223" parameterName="adv.min_mapq" label="Minimum mapping quality" type="integer"/>
+    </parameter>
+    <parameter name="jvarkit_wgscoverageplotter-12-adv.percentile" defaultValue="median">
+      <toolParameter toolId="5d3bef0d-fa3f-4733-a077-59f31dce3223" parameterName="adv.percentile" label="How to bin the coverage under one pixel" type="select"/>
+    </parameter>
+    <parameter name="jvarkit_wgscoverageplotter-12-adv.max_depth" defaultValue="-1">
+      <toolParameter toolId="5d3bef0d-fa3f-4733-a077-59f31dce3223" parameterName="adv.max_depth" label="y-axis (depth) limit of the plot" type="integer"/>
+    </parameter>
+    <parameter name="jvarkit_wgscoverageplotter-12-adv.points" defaultValue="false">
+      <toolParameter toolId="5d3bef0d-fa3f-4733-a077-59f31dce3223" parameterName="adv.points" label="Plot coverage using points instead of areas" type="boolean"/>
+    </parameter>
+    <parameter name="jvarkit_wgscoverageplotter-12-adv.clip" defaultValue="false">
+      <toolParameter toolId="5d3bef0d-fa3f-4733-a077-59f31dce3223" parameterName="adv.clip" label="Clip the plot at the y-axis limit" type="boolean"/>
+    </parameter>
+  </parameters>
+  <outputs>
+    <output name="consensus.fasta" fileName="consensus.fasta"/>
+    <output name="plot_output.png" fileName="plot_output.png"/>
+    <output name="aligned_reads.bam" fileName="aligned_reads.bam"/>
+    <output name="variants.tsv" fileName="variants.tsv"/>
+    <output name="snpeff_variants.vcf" fileName="snpeff_variants.vcf"/>
+    <output name="pangolin.tsv" fileName="pangolin.tsv"/>
+    <output name="nextclade.tsv" fileName="nextclade.tsv"/>
+    <output name="multiqc_output.html" fileName="multiqc_output.html"/>
+  </outputs>
+  <toolRepositories>
+    <repository>
+      <name>snpeff_sars_cov_2</name>
+      <owner>iuc</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>2a3a00c1fa0a</revision>
+    </repository>
+    <repository>
+      <name>read_it_and_keep</name>
+      <owner>iuc</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>1563b58905f4</revision>
+    </repository>
+    <repository>
+      <name>jvarkit_wgscoverageplotter</name>
+      <owner>iuc</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>ac048a34cac3</revision>
+    </repository>
+    <repository>
+      <name>nextclade</name>
+      <owner>iuc</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>9e10ba792be2</revision>
+    </repository>
+    <repository>
+      <name>ivar_variants</name>
+      <owner>iuc</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>3888bbe7a9ca</revision>
+    </repository>
+    <repository>
+      <name>pangolin</name>
+      <owner>iuc</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>81804a978fc0</revision>
+    </repository>
+    <repository>
+      <name>fastp</name>
+      <owner>iuc</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>65b93b623c77</revision>
+    </repository>
+    <repository>
+      <name>text_processing</name>
+      <owner>bgruening</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>9ff72e942410</revision>
+    </repository>
+    <repository>
+      <name>picard</name>
+      <owner>devteam</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>7d34178f2812</revision>
+    </repository>
+    <repository>
+      <name>bwa</name>
+      <owner>devteam</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>64f11cf59c6e</revision>
+    </repository>
+    <repository>
+      <name>samtools_view</name>
+      <owner>iuc</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>0dbf49c414ae</revision>
+    </repository>
+    <repository>
+      <name>multiqc</name>
+      <owner>iuc</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>75c93c70d094</revision>
+    </repository>
+    <repository>
+      <name>qualimap_bamqc</name>
+      <owner>iuc</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>19ece8afbaab</revision>
+    </repository>
+    <repository>
+      <name>ivar_consensus</name>
+      <owner>iuc</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>731182d54f78</revision>
+    </repository>
+    <repository>
+      <name>ivar_trim</name>
+      <owner>iuc</owner>
+      <url>https://toolshed.g2.bx.psu.edu</url>
+      <revision>c092052ed673</revision>
+    </repository>
+  </toolRepositories>
+</iridaWorkflow>
