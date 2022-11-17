@@ -161,9 +161,16 @@ workbench:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Clone the [workbench-deploy](https://github.com/combat-sars-cov-2/workbench-deploy) repository into the targeted server.:
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+`git clone https://github.com/combat-sars-cov-2/workbench-deploy`
+
+1. How to bring the workbench up? `$ workbench start`
+2. How to bring-down the workbench? `$ workbench stop`
+3. How to install GALAXY tools? `$ workbench install galaxy-tools`
+4. How to install IRIDA Plugins? `$ workbench install irida-plugins`
+
+_For more examples, please refer to the [Documentation](https://workbench.sanbi.ac.za/documentation)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
